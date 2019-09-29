@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="cssnya.css">
+    <title>Document</title>
+    <style>
+        .bg-red{background-color: red; color: white}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <table class="table" >
+        <tr>
+          <h2>FORM INPUT MASTER dan STOCK DATA BARANG</h2>
+        </tr>
+        <tr>
+            <td><h4>Kode Produk</h4></td>
+            <td><span id="kode">Md-01</span></td>
+        </tr>
+        <tr>
+            <td> <h4>Nama Produk</h4></td>
+            <td><input type="text" style="width: 300px" id="namap"></<input></td>
+        </tr>
+        <tr>
+            <td><h4>Harga Produk</h4></td>
+            <td><input type="number" style="width: 300px" id="hargap"></td>
+        </tr>
+        <tr>
+            <td> <h4>Satuan</h4></td>
+                    <td><select name="" id="satuan" style="width: 300px">
+                    <option value="null">Pilih satuan</option>
+                        <option value="Gelas">Gelas</option>
+                        <option value="Piring">Piring</option>
+                        <option value="Makanan">Makanan</option>
+                    </select>
+            </td>
+        </tr>
+        <tr>
+            <td> <h4>Kategori</h4></td>
+            <td>
+                <select name="" id="kategori"style="width: 300px">
+                    <option value="null">Pilih Kategori</option>
+                    <option value="Minuman Dingin">Minuman Dingin</option>
+                    <option value="Makanan">Makanan </option>
+                    <option value="Snack">Snack</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><h4>URL GAMBAR</h4></td>
+            <td><input type="url" style="width: 300px" id="gambar"></td>
+        </tr>
+
+        <tr>
+            <td><h4>Stock Awal</h4></td>
+            <td><input type="number" style="width: 300px" id="stok"></td>
+        </tr>
+        <tr>
+            <td><button onclick="simpan()">Simpan</button></td>
+        </tr>
+    </table>
+</div>
+
+   <div class="container-fluid">
+       <table class="table">
+           <tr>
+               <th>No</th>
+               <th>Kode Produk</th>
+               <th>Nama Produk</th>
+               <th>Harga produk</th>
+               <th>Satuan Produk</th>
+               <th>Kategori Produk</th>
+               <th>Stok Produk</th>
+               <th>Gambar produk</th>
+               <th>Modify</th>
+           </tr>
+           <tbody id="show">
+
+           </tbody>
+       </table>
+   </div>
+</body>
+
+<script>
+    var namap = []
+    var hargap = []
+    var satuanp = []
+    var katp = []
+    var stokp = []
+    var gambarp = []
+    var tampil = document.getElementById("show")
+
+    function show(){
+        tampil.innerHTML = ""
+        for (var i = 0 ;i < namap.length; i++) {
+            var itteration = i+1
+            kode = "MD-" + 000 + itteration
+            nomor = i + 1
+            tampil.innerHTML += 
+            "<tr><td>" + nomor + "</td>" +
+            "<td>" + kode + "</td>" +
+            "<td>" + namap[i]+ "</td>" +
+            "<td>" + hargap[i]+ "</td>" +
+            "<td>" + satuanp[i]+ "</td>" +
+            "<td>" + katp[i]+ "</td>" +
+            "<td id='stokProduk'>" + stokp[i]+ "</td>" +
+            "<td>" + "<img src='"+ gambarp[i] +"' style='width: 100px height: 100px' alt='gambar'>" + "</td>" +
+            "<td>" + "<button onclick='edit("+ i +")'>Edit</button>" +
+            "<button onclick='hapus("+ i +")'>Delete</button>" + "</td></tr>"
+        }
+        var stk =  document.getElementById('stokProduk')
+        var stkInner = stk.innerHTML
+        var cStk = Number(stkInner)
+        if (cStk < 5) {
+            stk.className += "bg-red"
+        }
+    }
+    function simpan() {
+        var nproduk = document.getElementById("namap").value
+        var hproduk = document.getElementById("hargap").value
+        var kproduk = document.getElementById("kategori").value
+        var sproduk = document.getElementById("satuan").value
+        var stproduk = document.getElementById("stok").value
+        var cStProduk = Number(stproduk)
+        var gproduk = document.getElementById("gambar").value
+        
+        namap.push(nproduk)
+        hargap.push(hproduk)
+        katp.push(kproduk)
+        satuanp.push(sproduk)
+        stokp.push(stproduk)
+        gambarp.push(gproduk)
+        show()
+    }
+    function hapus(i) {
+        namap.splice(i,1)
+        hargap.splice(i,1)
+        katp.splice(i,1)
+        satuanp.splice(i,1)
+        stokp.splice(i,1)
+        gambarp.splice(i,1)
+        show()
+    }
+    function edit(i) {
+        namae = prompt("Nama :")
+        hargae = prompt("Harga :")
+        kate = prompt("Kategori : ")
+        satuane = prompt("Satuan :") 
+        stoke = prompt("Stok :")
+        gambare = prompt("Url Gambar :")
+
+        namap[i] = namae
+        hargap[i] = hargae
+        satuanp[i] = satuane
+        katp[i] = kate
+        stokp[i] = stoke
+        gambarp[i] = gambare
+        show()
+    }
+</script>
+</html>
